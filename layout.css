@@ -1,0 +1,34 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #cccccc;
+}
+.container{
+    width: 80%;
+    height: 100%;
+    background-color: #ff6500;
+    margin: 0 auto;/*alinhamento central*/
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 100px 450px 150px;
+    grid-template-areas:"cabecalho cabecalho"
+                         "secao barra-lateral"
+                        "rodape rodape" ;
+}
+header{
+     background-color: #48cfe0;
+     grid-area: cabecalho;
+}
+main{
+    background-color: #e05da1;
+    grid-area: secao;
+}
+aside{
+    background-color: #e0d475;
+    grid-area: barra-lateral;
+}
+footer{
+    background-color: #23b80f;
+    grid-area: rodape;
+}

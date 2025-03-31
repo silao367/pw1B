@@ -1,16 +1,18 @@
 .menu{
     border: 1px ;solid;
-    background-color: #000000;
+    background-color: #ffffff;
     display: flex;
     list-style: none;
+    justify-content: center;
 }
 .item-menu{
     border: 1px solid#000000;
-    background-color: #d1d1d1;
+    background-color: #df0202;
     padding: 10px 40px;
     transition: opacity 1s;
     padding-top: 10px;
     padding-bottom: 10px;
+    margin: 5px 8px;
 }
 .item-menu:hover{
     opacity: 0.7;

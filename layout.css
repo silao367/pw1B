@@ -7,28 +7,25 @@ body, html{
 .container{
     width: 80%;
     height: 100%;
-    background-color: #ff6500;
+    background-color: #f54500;
     margin: 0 auto;/*alinhamento central*/
     display: grid;
-    grid-template-columns: 75% 25%;
-    grid-template-rows: 100px 450px 150px;
-    grid-template-areas:"cabecalho cabecalho"
-                         "secao barra-lateral"
-                        "rodape rodape" ;
+    grid-template-columns: 100% ;
+    grid-template-rows: 100px auto 150px;
+    grid-template-areas:"cabecalho "
+                         "secao "
+                         
 }
 header{
-     background-color: #48cfe0;
+     background-color: #ffffff;
      grid-area: cabecalho;
 }
 main{
-    background-color: #e05da1;
+    background-color: #ffffff;
     grid-area: secao;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: space-around;
 }
-aside{
-    background-color: #e0d475;
-    grid-area: barra-lateral;
-}
-footer{
-    background-color: #23b80f;
-    grid-area: rodape;
-}
+

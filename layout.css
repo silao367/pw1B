@@ -28,4 +28,8 @@ main{
     height: 100%;
     justify-content: space-around;
 }
+.banner{
+    width: 80%;
+    height: 100px;
+}
 

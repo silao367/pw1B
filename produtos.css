@@ -10,19 +10,27 @@ body, html{
     height: 100%;
 }
 header{
-    height: 100px;
+    height: 137px;
     width: 100%;
-    background-color: red; 
+    background-color: rgb(255, 255, 255); 
 }
 nav{
     height: 50px;
-    background-color: purple;
+    background-color: rgb(255, 255, 255);
     width: 100%;
+    
 }
 .descriçao{
     height: 100%;
     width: 100%;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    display: flex;
+    justify-content: end;
+}
+.descricao-titulo{
+    margin-right: 70px;
 }
 .produto{
     height: 500px;
@@ -33,30 +41,40 @@ nav{
 .img-produto{
     height: 100%;
     width: 50%;
-    background-color: blueviolet;
+    background-color: rgb(255, 255, 255);
     display: flex;
 
 }
 .comprar-produto{
     width: 50%;
     height: 100%;
-    background-color: rgb(0, 228, 38);
+    background-color: rgb(250, 250, 250);
+}
+.img-produto-rodape{
+    display: flex;
+    justify-content: center; 
 }
 .linha-botao-preco{
     display: flex;
     justify-content: space-between;
-    border: 2px solid;
+    
 }
 .preco{
     font-size: 50px;
     font-weight: bold;
     font-family:arial;
-    color: crimson;
+    color: rgb(6, 173, 70);
     margin: auto;
 }
 .botao-comprar{
-    background-color: crimson;
+    background-color: rgb(6, 173, 70);
     color: aliceblue;
     padding: 0 150px;
-    border: none;
+}
+.parcelamento{
+   display: flex;
+   justify-content: center;
+}
+.lista-parcela{
+    list-style: none;
 }

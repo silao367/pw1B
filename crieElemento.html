@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar elemento</title>
+</head>
+<body>
+    <button onclick="criarelemento()" id="botao">
+        <input type="color" id="cor" value="" > 
+        mudar cor de fundo
+    </button>
+    <div id="caixa" ></div>
+    <script>
+        function criarelemento()
+        {
+            var elemento = document.createElement("h1")
+            var cor = document.getElementById("cor") 
+            elemento.style.backgroundColor = cor.value
+            elemento.style.color = "#ff6500"
+            elemento.style.fontSize = '50px'
+            elemento.innerText = "oi Mundo"
+            elemento.classList.add("Classecampo")
+
+            var caixa = document.getElementById("caixa")
+            caixa.append(elemento)
+         }
+
+    </script>
+</body>
+</html>

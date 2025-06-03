@@ -33,3 +33,92 @@
     </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Exercícios</h1>
+    <ol>
+        <li>Crie uma div, um input, uma lista (&lt;UL&gt;) e um botão</li>
+        <li>Crie um vetor com 150 números em ordem decrescente.</li>
+        <li>Crie uma função que coloque o vetor dentro do UL utilizando createElement("li")</li>
+        <li>Some todos os números pares desse vetor e exiba na tela dentro de uma div</li>
+        <li>Some todos os números ímpares desse vetor e exiba na tela dentro de uma input</li>
+        <li>Multiplique cada elemento do vetor por 2 e armazene os resultados em uma nova DIV.</li>
+        <li>Ao clicar no botão todas as ações anteriores devem ser executadas.</li>
+    </ol>
+
+    <div id="box"></div>
+    <input type="text" name="entrada" id="entrada"/>
+    <button onclick="acoes()">
+        Botão para ser clicado
+    </button>
+    <ul id="lista">
+            <li>Item Fixo</li>
+    </ul>
+<script>
+    var numeros = []
+    for(var i = 150; i > 0; i--)
+    {
+        numeros.push(i)
+    }
+
+    function AddItemLista(){
+        var lista = document.getElementById("lista")
+
+        var itemLista = document.createElement('li')
+        itemLista.innerText = "Meu item da lista Criado pelo javascript"
+
+        lista.append(itemLista)
+    }
+    function acoes(){
+    var div = document.getElementById("box")
+    var soma = 0
+    var somaImpar = 0
+    var mult = []
+    for(var i = 0; i < numeros.length; i++)
+    {
+        if(numeros[i] % 2 == 0)
+        {
+            soma = soma + numeros[i]
+        }else{
+            somaImpar = somaImpar + numeros[i]
+        }
+
+        mult.push(numeros[i]*2)
+    }
+    div.innerHTML = "Soma dos números pares:"+soma+"<br>"+"Soma dos ímpares:"+somaImpar
+    var input = document.getElementById("entrada")
+    input.value = somaImpar
+
+    var novaDiv = document.createElement("div")
+    novaDiv.Id = "novaDiv"
+    novaDiv.style.backgroundColor = "#FF6500"
+    novaDiv.style.border = "5px double #FF00FF"
+    novaDiv.style.width = "550px"
+
+    novaDiv.style.display = "flex"
+    novaDiv.style.justifyContent = "center"
+    novaDiv.style.alignItems = "center"
+    novaDiv.style.color = "#FFFFFF"
+    novaDiv.style.fontSize = "25px"
+
+    for(var i = 0; i < numeros.length ; i++)
+    {
+        novaDiv.innerHTML += "<br>"+mult[i]
+    }
+   
+
+    div.appendChild(novaDiv)
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,48 +1,198 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="./favicons/favicon-16x16 (1).png">
-    <link rel="stylesheet" href="./css/style.css">
-
-    <script defer src="./js/js"></script>
-
-    <title>Pokedex</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pokedex</title>
+<link rel="icon" href="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/19790c7a-6f8b-4920-9458-6994523405d0.png" type="image/png" />
+<style>
+  /* Estilo base para aspecto moderno */
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1e202a, #232946);
+    color: #f0f0f0;
+    margin: 0; padding: 24px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+  }
+  main {
+    background: #2b2e4a;
+    padding: 32px;
+    border-radius: 24px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  }
+  img.pokemon__image {
+    width: 180px;
+    height: 180px;
+    image-rendering: pixelated;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background-color: #fff;
+  }
+  h1.pokemon__data {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    text-transform: capitalize;
+    font-weight: 700;
+  }
+  span.pokemonnumero {
+    color: #ea5455;
+    font-weight: 900;
+    font-size: 1.6rem;
+  }
+  form.form {
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+  }
+  input.input_search {
+    flex: 1;
+    font-size: 1rem;
+    padding: 12px 16px;
+    border-radius: 16px;
+    border: none;
+    outline: none;
+  }
+  input.input_search:focus {
+    box-shadow: 0 0 10px #f67280;
+  }
+  button.button {
+    background: #f67280;
+    border: none;
+    border-radius: 16px;
+    padding: 0 16px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button.button:hover:not(:disabled) {
+    background: #c34246;
+  }
+  button.button:disabled {
+    background: #865c65;
+    cursor: default;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  img.pokedex {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+</style>
 </head>
 <body>
-
-    <main>
-
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/6.gif" alt="pokemon" class="pokemon__image"> 
-     <h1 class="pokemon__data">
-            <span class="pokemon__number">6</span> -
-            <span class="pokemon__name">charizard</span>
-        </h1>
-
-        <form class="form">
-            <input
-             type="search"
-             class="input__search"
-             placeholder="Nome"
-             required
-             \>
-             <input
-             type="search"
-             class="input__search"
-             placeholder="Numero"
-             required
-             \>
-        </form>
-        <div class="buttons">
-            <button  values="click" id="submit" class="button btn-prev">&lt volta</button>
-            <button class="button btn-next">prox &gt;</button>
-          </div>
-
-        <img src="./image/pokedex (1).png" alt="pokedex" class="pokedex">
-
-
-    </main>
+<main>
+  <img src="" alt="Imagem do Pokémon" class="pokemon__image" />
+  <h1 class="pokemon__data">
+    <span class="pokemonnumero"></span>
+    <span class="pokemonnome"></span>
+  </h1>
+  <form class="form" id="form">
+    <input
+      type="search"
+      id="input_search"
+      class="input_search"
+      placeholder="Digite nome ou número"
+      autocomplete="off"
+      required
+      aria-label="Buscar Pokémon pelo nome ou número"
+    />
+    <button type="submit" class="button" aria-label="Buscar Pokémon">Buscar</button>
+  </form>
+  <div class="buttons">
+    <button type="button" class="button btn-volta" id="btn-volta" aria-label="Pokémon anterior">&lt; Voltar</button>
+    <button type="button" class="button btn-prox" id="btn-prox" aria-label="Próximo Pokémon">Próximo &gt;</button>
+  </div>
+  <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2ebbcbb5-1d8a-4b26-9ef8-12734cc5dc2b.png" alt="Imagem ilustrativa da Pokedex" class="pokedex" />
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const pokemonnome = document.querySelector('.pokemonnome');
+    const pokemonnumero = document.querySelector('.pokemonnumero');
+    const pokemonImage = document.querySelector('.pokemon__image');
+  
+    const form = document.getElementById('form');
+    const input = document.getElementById('input_search');
+    const buttonvolta = document.getElementById('btn-volta');
+    const buttonprox = document.getElementById('btn-prox');
+  
+    let searchPokemon = 1;
+  
+    async function fetchPokemon(pokemon) {
+      try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.toString().toLowerCase()}`);
+        if (!res.ok) throw new Error('Pokémon não encontrado');
+        const data = await res.json();
+        return data;
+      } catch {
+        return null;
+      }
+    }
+  
+    async function renderPokemon(pokemon) {
+      pokemonnome.textContent = 'Carregando...';
+      pokemonnumero.textContent = '';
+      pokemonImage.style.display = 'none';
+  
+      const data = await fetchPokemon(pokemon);
+  
+      if (data) {
+        pokemonImage.style.display = 'block';
+        pokemonnome.textContent = data.name;
+        pokemonnumero.textContent = `#${data.id}`;
+        pokemonImage.src = data.sprites.versions['generation-v']['black-white'].animated.front_default || data.sprites.front_default;
+        searchPokemon = data.id;
+        updateButtons();
+      } else {
+        pokemonnome.textContent = 'Pokémon não encontrado :c';
+        pokemonnumero.textContent = '';
+        pokemonImage.style.display = 'none';
+        updateButtons();
+      }
+    }
+  
+    function updateButtons() {
+      buttonvolta.disabled = searchPokemon <= 1;
+    }
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let val = input.value.trim();
+      if (val) {
+        renderPokemon(val);
+        input.value = '';
+      }
+    });
+  
+    buttonvolta.addEventListener('click', () => {
+      if (searchPokemon > 1) {
+        searchPokemon -= 1;
+        renderPokemon(searchPokemon);
+      }
+    });
+  
+    buttonprox.addEventListener('click', () => {
+      searchPokemon += 1;
+      renderPokemon(searchPokemon);
+    });
+  
+    renderPokemon(searchPokemon);
+  });
+</script>
 </body>
 </html>
